@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: dummy
-        image: klimdos/python-flask-dummy:sha-9f1b25c
+        image: klimdos/python-flask-dummy:master
         env:
         - name: PORT
           value: "8080"
