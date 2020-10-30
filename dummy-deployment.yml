@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dummy-prod-flux
+  namespace: dummy-prod-flux
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: dummy-prod-flux
+  template:
+    metadata:
+      labels:
+        app: dummy-prod-flux
+        terraform: "false"
+    spec:
+      containers:
+      - name: dummy
+        image: klimdos/python-flask-dummy:sha-ec34f2a
+        env:
+          - name: PORT
+            value: "8080"
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "50m"
+        ports:
+        - containerPort: 8080
