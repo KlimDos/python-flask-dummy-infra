@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: dummy-prod-flux
+  annotations:
+    fluxcd.io/automated: "true"
 spec:
   replicas: 1
   selector:
@@ -15,7 +17,7 @@ spec:
     spec:
       containers:
       - name: dummy
-        image: klimdos/python-flask-dummy:sha-ec34f2a
+        image: docker.io/klimdos/python-flask-dummy:sha-ec34f2a
         env:
           - name: PORT
             value: "8080"
