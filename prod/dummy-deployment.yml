@@ -2,18 +2,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dummy-prod-flux
+  name: app-prod
   annotations:
     fluxcd.io/automated: "true"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: dummy-prod-flux
+      app: app-prod
   template:
     metadata:
       labels:
-        app: dummy-prod-flux
+        app: app-prod
         terraform: "false"
     spec:
       containers:
