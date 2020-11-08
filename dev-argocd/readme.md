@@ -1,0 +1,4 @@
+- description of each file in this dir
+- deployment is using configMap named *cloudd-dashboard-api-properties* which has to be created separately 
+
+

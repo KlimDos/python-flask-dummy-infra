@@ -1,0 +1,59 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-dev
+  namespace: app-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-dev
+  template:
+    metadata:
+      labels:
+        app: app-dev
+        terraform: "false"
+    spec:
+      # imagePullSecrets:
+      # - name: regcred
+      containers:
+      - name: cloudd-dashboard-api
+        image: cr.yandex/crp7cn95sroaqove1rcr/cloudd-dashboard-api:v0.2-14-g25f6d8a
+        env:
+          - name: PG_URL
+            valueFrom:
+              configMapKeyRef:
+                name: cloudd-dashboard-api-properties
+                key: PG_URL
+          - name: PG_USERNAME
+            valueFrom:
+              configMapKeyRef:
+                name: cloudd-dashboard-api-properties
+                key: PG_USERNAME
+          - name: PG_PASSWORD
+            valueFrom:
+              configMapKeyRef:
+                name: cloudd-dashboard-api-properties
+                key: PG_PASSWORD
+          - name: MAIL_NOREPLY_USERNAME
+            valueFrom:
+              configMapKeyRef:
+                name: cloudd-dashboard-api-properties
+                key: MAIL_NOREPLY_USERNAME
+          - name: MAIL_NOREPLY_PASSWORD
+            valueFrom:
+              configMapKeyRef:
+                name: cloudd-dashboard-api-properties
+                key: MAIL_NOREPLY_PASSWORD
+          - name: API_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: cloudd-dashboard-api-properties
+                key: API_PORT
+        resources:
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8081 # informational

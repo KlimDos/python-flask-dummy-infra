@@ -2,29 +2,35 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-prod
+  name: app-dev
+  namespace: app-dev
   annotations:
     fluxcd.io/automated: "true"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: app-prod
+      app: app-dev
   template:
     metadata:
       labels:
-        app: app-prod
+        app: app-dev
         terraform: "false"
     spec:
+      # imagePullSecrets:
+      # - name: regcred
       containers:
       - name: dummy
-        image: klimdos/python-flask-dummy:v1.0.27-geea9520
-        env:
-        - name: PORT
-          value: "8080"
+        #image: klimdos/python-flask-dummy:v1.0.27-geea9520
+        #image: cr.yandex/crp7cn95sroaqove1rcr/cloudd-dashboard-ui:v0.1-218-g287150e
+
+        image: cr.yandex/crp7cn95sroaqove1rcr/cloudd-dashboard-ui:v0.1-222-g0a4563f
+        # env:
+        # - name: PORT
+        #   value: "8080"
         resources:
           limits:
             memory: "128Mi"
             cpu: "50m"
         ports:
-        - containerPort: 8080
+        - containerPort: 80
