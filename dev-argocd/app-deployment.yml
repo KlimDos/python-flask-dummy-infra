@@ -19,7 +19,7 @@ spec:
       # - name: regcred
       containers:
       - name: cloudd-dashboard-api
-        image: cr.yandex/crp7cn95sroaqove1rcr/cloudd-dashboard-api:v0.2-14-g25f6d8a
+        image: cr.yandex/crp7cn95sroaqove1rcr/cloudd-dashboard-api:v0.2-8-ge193008-snapshot-1604091297
         env:
           - name: PG_URL
             valueFrom:
